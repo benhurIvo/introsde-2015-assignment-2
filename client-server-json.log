@@ -1,0 +1,489 @@
+
+
+Request #:1 GET person Accept: application/xml Content-type: application/xml
+Result: OK
+HTTP Status:200
+
+
+Request #:1 GET person Accept: application/json Content-type: application/json
+Result: OK
+HTTP Status:200
+[ {
+  "firstname" : "Chuck",
+  "lastname" : "Norris",
+  "birthdate" : "1945-01-01",
+  "healthProfile" : {
+    "weight" : "300",
+    "height" : "19",
+    "bloodpressure" : null
+  },
+  "id" : "1"
+}, {
+  "firstname" : "Salim",
+  "lastname" : "Saleh",
+  "birthdate" : "2000-01-01",
+  "healthProfile" : {
+    "weight" : "20.9",
+    "height" : "12.0",
+    "bloodpressure" : "22.0"
+  },
+  "id" : "28"
+}, {
+  "firstname" : "Salim",
+  "lastname" : "Saleh",
+  "birthdate" : "2000-01-01",
+  "healthProfile" : {
+    "weight" : "20.9",
+    "height" : "12.0",
+    "bloodpressure" : "12"
+  },
+  "id" : "32"
+}, {
+  "firstname" : "Salim",
+  "lastname" : "Saleh",
+  "birthdate" : "2000-01-01",
+  "healthProfile" : {
+    "weight" : "20.9",
+    "height" : "12.0",
+    "bloodpressure" : "12"
+  },
+  "id" : "36"
+}, {
+  "firstname" : "Salim",
+  "lastname" : "Saleh",
+  "birthdate" : "2000-01-01",
+  "healthProfile" : {
+    "weight" : "20.9",
+    "height" : "12.0",
+    "bloodpressure" : "12"
+  },
+  "id" : "40"
+}, {
+  "firstname" : "Benhur",
+  "lastname" : "Ivo",
+  "birthdate" : "2819-01-01",
+  "healthProfile" : {
+    "weight" : "12.0",
+    "height" : "17.0",
+    "bloodpressure" : null
+  },
+  "id" : "60"
+}, {
+  "firstname" : "Chic",
+  "lastname" : "pretty",
+  "birthdate" : "2000-01-01",
+  "healthProfile" : {
+    "weight" : null,
+    "height" : "12.0",
+    "bloodpressure" : "12"
+  },
+  "id" : "63"
+}, {
+  "firstname" : "ivo",
+  "lastname" : "ivan",
+  "birthdate" : "2000-01-01",
+  "healthProfile" : {
+    "weight" : "12",
+    "height" : null,
+    "bloodpressure" : "12"
+  },
+  "id" : "66"
+}, {
+  "firstname" : "Mercy",
+  "lastname" : "Lovely",
+  "birthdate" : "2000-01-01",
+  "healthProfile" : {
+    "weight" : "60",
+    "height" : null,
+    "bloodpressure" : "12"
+  },
+  "id" : "69"
+} ]
+ Proceeding to step 2 printing first person
+
+Request #:2 GET person/1 Accept: application/json Content-type: application/json
+Result: OK
+HTTP Status:200
+{
+  "firstname" : "Chuck",
+  "lastname" : "Norris",
+  "birthdate" : "1945-01-01",
+  "healthProfile" : {
+    "weight" : "300",
+    "height" : "19",
+    "bloodpressure" : null
+  },
+  "id" : "1"
+}
+ Proceeding to step 3, changing first name of first person
+
+Request #:3 PUT person/1 Accept: application/json Content-type: application/json
+Result: OK
+HTTP Status:200
+{
+  "firstname" : "Chuck",
+  "lastname" : "Norris",
+  "birthdate" : "1945-01-01",
+  "healthProfile" : {
+    "weight" : "300",
+    "height" : "19",
+    "bloodpressure" : null
+  },
+  "id" : "1"
+}
+ Proceeding to step 4, adding new person
+
+Request #:4 POST person/ Accept: application/json Content-type: application/json
+Result: OK
+HTTP Status:200
+Person successfully saved{
+  "firstname" : "Chuck",
+  "lastname" : "Norris",
+  "birthdate" : "1945-01-01",
+  "healthProfile" : {
+    "weight" : "78.9",
+    "height" : "172",
+    "bloodpressure" : null
+  },
+  "id" : "76"
+}
+ Proceeding to step 5, deleting new person and returning list of people
+
+Request #:5 DELETE person/76 Accept: application/json Content-type: application/json
+Result: OK
+HTTP Status:200
+[ {
+  "firstname" : "Chuck",
+  "lastname" : "Norris",
+  "birthdate" : "1945-01-01",
+  "healthProfile" : {
+    "weight" : "300",
+    "height" : "19",
+    "bloodpressure" : null
+  },
+  "id" : "1"
+}, {
+  "firstname" : "Salim",
+  "lastname" : "Saleh",
+  "birthdate" : "2000-01-01",
+  "healthProfile" : {
+    "weight" : "20.9",
+    "height" : "12.0",
+    "bloodpressure" : "22.0"
+  },
+  "id" : "28"
+}, {
+  "firstname" : "Salim",
+  "lastname" : "Saleh",
+  "birthdate" : "2000-01-01",
+  "healthProfile" : {
+    "weight" : "20.9",
+    "height" : "12.0",
+    "bloodpressure" : "12"
+  },
+  "id" : "32"
+}, {
+  "firstname" : "Salim",
+  "lastname" : "Saleh",
+  "birthdate" : "2000-01-01",
+  "healthProfile" : {
+    "weight" : "20.9",
+    "height" : "12.0",
+    "bloodpressure" : "12"
+  },
+  "id" : "36"
+}, {
+  "firstname" : "Salim",
+  "lastname" : "Saleh",
+  "birthdate" : "2000-01-01",
+  "healthProfile" : {
+    "weight" : "20.9",
+    "height" : "12.0",
+    "bloodpressure" : "12"
+  },
+  "id" : "40"
+}, {
+  "firstname" : "Benhur",
+  "lastname" : "Ivo",
+  "birthdate" : "2819-01-01",
+  "healthProfile" : {
+    "weight" : "12.0",
+    "height" : "17.0",
+    "bloodpressure" : null
+  },
+  "id" : "60"
+}, {
+  "firstname" : "Chic",
+  "lastname" : "pretty",
+  "birthdate" : "2000-01-01",
+  "healthProfile" : {
+    "weight" : null,
+    "height" : "12.0",
+    "bloodpressure" : "12"
+  },
+  "id" : "63"
+}, {
+  "firstname" : "ivo",
+  "lastname" : "ivan",
+  "birthdate" : "2000-01-01",
+  "healthProfile" : {
+    "weight" : "12",
+    "height" : null,
+    "bloodpressure" : "12"
+  },
+  "id" : "66"
+}, {
+  "firstname" : "Mercy",
+  "lastname" : "Lovely",
+  "birthdate" : "2000-01-01",
+  "healthProfile" : {
+    "weight" : "60",
+    "height" : null,
+    "bloodpressure" : "12"
+  },
+  "id" : "69"
+} ]
+ Getting measuretypes
+
+Request #:9 GET measureTypes Accept: application/json Content-type: application/json
+Result: OK
+HTTP Status:200
+[ {
+  "value" : "height"
+}, {
+  "value" : "weight"
+}, {
+  "value" : "bloodpressure"
+} ]
+ Measuretypes for first and last person
+
+Request #:6 GET person/1/height Accept: application/json Content-type: application/json
+Result: OK
+HTTP Status:200
+
+
+Request #:6 GET person/1/height Accept: application/json Content-type: application/json
+Result: OK
+HTTP Status:200
+1st person height
+[ {
+  "value" : "172.0",
+  "datechanged" : "2015-11-15",
+  "id" : "3"
+}, {
+  "value" : "17.0",
+  "datechanged" : "2015-11-16",
+  "id" : "44"
+}, {
+  "value" : "19",
+  "datechanged" : "2015-11-16",
+  "id" : "45"
+} ]2nd person height
+[ {
+  "value" : "172.0",
+  "datechanged" : "2015-11-15",
+  "id" : "3"
+}, {
+  "value" : "17.0",
+  "datechanged" : "2015-11-16",
+  "id" : "44"
+}, {
+  "value" : "19",
+  "datechanged" : "2015-11-16",
+  "id" : "45"
+} ]
+
+Request #:6 GET person/1/weight Accept: application/json Content-type: application/json
+Result: OK
+HTTP Status:200
+
+
+Request #:6 GET person/1/weight Accept: application/json Content-type: application/json
+Result: OK
+HTTP Status:200
+1st person weight
+[ {
+  "value" : "78.9",
+  "datechanged" : "2015-11-15",
+  "id" : "2"
+}, {
+  "value" : "22.0",
+  "datechanged" : "2015-11-16",
+  "id" : "46"
+}, {
+  "value" : "300",
+  "datechanged" : "2015-11-23",
+  "id" : "75"
+} ]2nd person weight
+[ {
+  "value" : "78.9",
+  "datechanged" : "2015-11-15",
+  "id" : "2"
+}, {
+  "value" : "22.0",
+  "datechanged" : "2015-11-16",
+  "id" : "46"
+}, {
+  "value" : "300",
+  "datechanged" : "2015-11-23",
+  "id" : "75"
+} ]
+
+Request #:6 GET person/1/bloodpressure Accept: application/json Content-type: application/json
+Result: OK
+HTTP Status:200
+
+
+Request #:6 GET person/1/bloodpressure Accept: application/json Content-type: application/json
+Result: OK
+HTTP Status:200
+1st person bloodpressure
+[ ]2nd person bloodpressure
+[ ]
+ Measuretype for for given measure id for ist person
+
+Request #:7 GET person/1/weight/46 Accept: application/json Content-type: application/json
+Result: OK
+HTTP Status:200
+{
+  "value" : "22.0",
+  "datechanged" : "2015-11-16",
+  "id" : null
+}
+ Measure history for 1st person
+
+Request #:6 GET person/1/weight Accept: application/json Content-type: application/json
+Result: OK
+HTTP Status:200
+[ {
+  "value" : "78.9",
+  "datechanged" : "2015-11-15",
+  "id" : "2"
+}, {
+  "value" : "22.0",
+  "datechanged" : "2015-11-16",
+  "id" : "46"
+}, {
+  "value" : "300",
+  "datechanged" : "2015-11-23",
+  "id" : "75"
+} ]
+ Measure has 3 elements
+ Adding Measure to 1st person
+
+Request #:8 POST person/1/weight/ Accept: application/json Content-type: application/json
+Result: OK
+HTTP Status:200
+
+
+Request #:6 GET person/1/weight Accept: application/json Content-type: application/json
+Result: OK
+HTTP Status:200
+[ {
+  "value" : "78.9",
+  "datechanged" : "2015-11-15",
+  "id" : "2"
+}, {
+  "value" : "22.0",
+  "datechanged" : "2015-11-16",
+  "id" : "46"
+}, {
+  "value" : "300",
+  "datechanged" : "2015-11-23",
+  "id" : "75"
+}, {
+  "value" : "200",
+  "datechanged" : "2015-11-23",
+  "id" : "79"
+} ]
+ Measure had 3 elements but now has 4 elements
+ Updating the created Measure for 1st person
+
+Request #:10 PUT person/1/weight/79 Accept: application/json Content-type: application/json
+Result: OK
+HTTP Status:200
+{
+  "value" : "300",
+  "datechanged" : "2015-11-23",
+  "id" : null
+}
+ Getting measuretypes in a certain date range
+
+Request #:11 GET person/1/weight/before=12-12-2022&after=14-11-1888 Accept: application/json Content-type: application/json
+Result: OK
+HTTP Status:200
+[ {
+  "value" : "78.9",
+  "datechanged" : "2015-11-15",
+  "id" : "2"
+}, {
+  "value" : "22.0",
+  "datechanged" : "2015-11-16",
+  "id" : "46"
+} ]
+ Getting measuretypes in a certain size range
+
+Request #:12 GET person/weight/max=300&min=20 Accept: application/json Content-type: application/json
+Result: OK
+HTTP Status:200
+[ {
+  "firstname" : "Chuck",
+  "lastname" : "Norris",
+  "birthdate" : "1945-01-01",
+  "healthProfile" : {
+    "weight" : "300",
+    "height" : "19",
+    "bloodpressure" : null
+  },
+  "id" : "1"
+}, {
+  "firstname" : "Salim",
+  "lastname" : "Saleh",
+  "birthdate" : "2000-01-01",
+  "healthProfile" : {
+    "weight" : "20.9",
+    "height" : "12.0",
+    "bloodpressure" : "22.0"
+  },
+  "id" : "28"
+}, {
+  "firstname" : "Salim",
+  "lastname" : "Saleh",
+  "birthdate" : "2000-01-01",
+  "healthProfile" : {
+    "weight" : "20.9",
+    "height" : "12.0",
+    "bloodpressure" : "12"
+  },
+  "id" : "32"
+}, {
+  "firstname" : "Salim",
+  "lastname" : "Saleh",
+  "birthdate" : "2000-01-01",
+  "healthProfile" : {
+    "weight" : "20.9",
+    "height" : "12.0",
+    "bloodpressure" : "12"
+  },
+  "id" : "36"
+}, {
+  "firstname" : "Salim",
+  "lastname" : "Saleh",
+  "birthdate" : "2000-01-01",
+  "healthProfile" : {
+    "weight" : "20.9",
+    "height" : "12.0",
+    "bloodpressure" : "12"
+  },
+  "id" : "40"
+}, {
+  "firstname" : "Mercy",
+  "lastname" : "Lovely",
+  "birthdate" : "2000-01-01",
+  "healthProfile" : {
+    "weight" : "60",
+    "height" : null,
+    "bloodpressure" : "12"
+  },
+  "id" : "69"
+} ]
