@@ -1,6 +1,8 @@
 package rest.client;
 
 import java.io.ByteArrayInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URI;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,6 +34,8 @@ public class Test {
 	static int count=0;
 	static int newcount=0;
 	static String measure="";
+	static FileWriter f0;
+	static String newLine;
 	public static void main(String[] args) {
 
 	String Jdata = "{\n" +
@@ -46,6 +50,10 @@ public class Test {
 "  }";
 	
 try{
+ f0 = new FileWriter(System.getProperty("user.dir")+"/client-server-json.log");
+
+  newLine = System.getProperty("line.separator");
+ 
     String media = MediaType.APPLICATION_XML;
 	String output = getResults("1","GET","person","",media);
 	JSONArray array = null;
@@ -96,42 +104,42 @@ try{
 	    first_person_id = Integer.parseInt(array.getJSONObject(0).getString("id"));
 	    last_person_id = Integer.parseInt(array.getJSONObject(array.length()-1).getString("id"));
 	
-	    System.out.println(Formatter.prettyJsonFormat(output));
-	    System.out.println("\n Proceeding to step 2 printing first person");
-	    System.out.println(Formatter.prettyJsonFormat(getPersonId(media,first_person_id)));
-	    System.out.println("\n Proceeding to step 3, changing first name of first person");
-	       System.out.println(Formatter.prettyJsonFormat(putPersonId(Jdata,media,first_person_id)));
-	      System.out.println("\n Proceeding to step 4, adding new person");
+	    f0.write(Formatter.prettyJsonFormat(output));
+	    f0.write("\n Proceeding to step 2 printing first person");
+	    f0.write(Formatter.prettyJsonFormat(getPersonId(media,first_person_id)));
+	    f0.write("\n Proceeding to step 3, changing first name of first person");
+	    f0.write(Formatter.prettyJsonFormat(putPersonId(Jdata,media,first_person_id)));
+	    f0.write("\n Proceeding to step 4, adding new person");
 	      output = getResults("4","POST","person/",Jdata,media);
 	      array = new JSONArray("["+output+"]"); 
 		JSONObject jsonObj  = array.getJSONObject(array.length()-1);
 		new_person_id=Integer.parseInt(jsonObj.getString("id"));
 	      if(last_person_id==new_person_id)
-		   System.out.println("Person not saved");
+		   f0.write("Person not saved");
 		   
 	      else {
-	      System.out.println("Person successfully saved");
-	       System.out.println(Formatter.prettyJsonFormat(output));	       
-		System.out.println("\n Proceeding to step 5, deleting new person and returning list of people");
-		System.out.println(Formatter.prettyJsonFormat(delPerson("",media,new_person_id)));
+	      f0.write("Person successfully saved");
+	       f0.write(Formatter.prettyJsonFormat(output));	       
+		f0.write("\n Proceeding to step 5, deleting new person and returning list of people");
+		f0.write(Formatter.prettyJsonFormat(delPerson("",media,new_person_id)));
 	      }
-	      System.out.println("\n Getting measuretypes");
+	      f0.write("\n Getting measuretypes");
 	      output = getMeasure(media);
 	
 	array = new JSONArray(output); 
 	cnt = array.length();
 	if(cnt<2)
-	    System.out.println("\nFew measuretypes");
+	    f0.write("\nFew measuretypes");
 	else{
-	System.out.println(Formatter.prettyJsonFormat(output));
-	System.out.println("\n Measuretypes for first and last person");		
+	f0.write(Formatter.prettyJsonFormat(output));
+	f0.write("\n Measuretypes for first and last person");		
 	      array = new JSONArray(output); 
 		for(int i=0;i<array.length();i++){
 		    String rslt = getResults("6","GET","person/"+String.valueOf(first_person_id)+"/"+array.getJSONObject(i).getString("value"),"",media);
 		    String rslt1 = getResults("6","GET","person/"+String.valueOf(first_person_id)+"/"+array.getJSONObject(i).getString("value"),"",media);
 		    if(array.getJSONObject(i).getString("value").toString().length()!=0){
-		    System.out.println("1st person " + array.getJSONObject(i).getString("value")+"\n" +Formatter.prettyJsonFormat(rslt));
-		    System.out.println("2nd person " + array.getJSONObject(i).getString("value")+"\n" +Formatter.prettyJsonFormat(rslt1));
+		    f0.write("1st person " + array.getJSONObject(i).getString("value")+"\n" +Formatter.prettyJsonFormat(rslt));
+		    f0.write("2nd person " + array.getJSONObject(i).getString("value")+"\n" +Formatter.prettyJsonFormat(rslt1));
 		
 		    }if(rslt.length()>5)
 		{
@@ -141,15 +149,15 @@ try{
 		 		
 		}
 	}
-		  System.out.println("\n Measuretype for for given measure id for ist person");
-		  System.out.println(Formatter.prettyJsonFormat(getPersonMeasureId(first_person_id,measure,mid,media)));
-		  System.out.println("\n Measure history for 1st person");
+		  f0.write("\n Measuretype for for given measure id for ist person");
+		  f0.write(Formatter.prettyJsonFormat(getPersonMeasureId(first_person_id,measure,mid,media)));
+		  f0.write("\n Measure history for 1st person");
 		  output = getPersonMeasure(first_person_id,measure,media);
-		  System.out.println(Formatter.prettyJsonFormat(output));
+		  f0.write(Formatter.prettyJsonFormat(output));
 		  array = new JSONArray(output);
 		  count = array.length();
-		  System.out.println("\n Measure has "+count + " elements");
-		  System.out.println("\n Adding Measure to 1st person");
+		  f0.write("\n Measure has "+count + " elements");
+		  f0.write("\n Adding Measure to 1st person");
 		  Jdata = " {\n" +
 "  \"value\" : \"200\"\n" +
 "} ";
@@ -157,26 +165,26 @@ try{
 		  array = new JSONArray(output);
 		  newcount = array.length();
 		  output = getPersonMeasure(first_person_id,measure,media);
-		  System.out.println(Formatter.prettyJsonFormat(output));		  
-		  System.out.println("\n Measure had "+count + " elements but now has "+newcount+" elements");
+		  f0.write(Formatter.prettyJsonFormat(output));		  
+		  f0.write("\n Measure had "+count + " elements but now has "+newcount+" elements");
 	
-		  System.out.println("\n Updating the created Measure for 1st person");
+		  f0.write("\n Updating the created Measure for 1st person");
 		  //array = new JSONArray(rslt);
 		mid = Integer.parseInt(array.getJSONObject(array.length()-1).getString("id"));
 		Jdata = " {\n" +
 "  \"value\" : \"300\"\n" +
 "} ";
 		output = putPersonMeasureId(first_person_id,measure,mid,media,Jdata);
-		System.out.println(Formatter.prettyJsonFormat(output));
-		System.out.println("\n Getting measuretypes in a certain date range");
-		System.out.println(Formatter.prettyJsonFormat(getPersonMeasureDate(first_person_id,measure,"12-12-2022","14-11-1888",media)));
-		System.out.println("\n Getting measuretypes in a certain size range");
-		System.out.println(Formatter.prettyJsonFormat(getPersonMeasureRange(first_person_id,measure,20,300,media)));
+		f0.write(Formatter.prettyJsonFormat(output));
+		f0.write("\n Getting measuretypes in a certain date range");
+		f0.write(Formatter.prettyJsonFormat(getPersonMeasureDate(first_person_id,measure,"12-12-2022","14-11-1888",media)));
+		f0.write("\n Getting measuretypes in a certain size range");
+		f0.write(Formatter.prettyJsonFormat(getPersonMeasureRange(first_person_id,measure,20,300,media)));
 	}
 	      
 	   }
 	   else{
-	    System.out.println("Result: ERROR Too few people \nHTTP Status: 400");
+	    f0.write("Result: ERROR Too few people \nHTTP Status: 400");
 	}
 	
 //		System.out.println("Result: ERROR \nHTTP Status: 200");
@@ -184,7 +192,7 @@ try{
 //	    System.out.println(Formatter.prettyXMLFormat(output));
 //	else
 //	    System.out.println(Formatter.prettyJsonFormat(output));
-	
+	f0.close();
 	}catch(Exception ex){
 	ex.printStackTrace();
 	}	
@@ -205,23 +213,29 @@ try{
     }
 	
 public static String getResults(String reqNo,String reqType,String url,String data,String media){
-   Response response = service.path(url).request().get();
-String entity = response.readEntity(String.class);
-WriteToFile.write("client-server-json.log","\n\nRequest #:"+reqNo+" "+reqType+" "+url+" Accept: "+media+" Content-type: "+media);
-System.out.println("\nResult: "+ response.getStatusInfo().getReasonPhrase() + "\nHTTP Status:"+response.getStatus()+"\n");
-
-
-String output ="";
-if(reqType.toLowerCase().contains("get"))
-output =service.path(url).request().accept(media).get().readEntity(String.class);
-if(reqType.toLowerCase().contains("post"))
-output =service.path(url).request().accept(media).post(Entity.json(data)).readEntity(String.class);
-if(reqType.toLowerCase().contains("put"))
-output =service.path(url).request().accept(media).put(Entity.json(data)).readEntity(String.class);
-if(reqType.toLowerCase().contains("delete"))
-output =service.path(url).request().accept(media).delete().readEntity(String.class);
-  
-return output;
+    
+	   String output ="";   
+    try {
+	   Response response = service.path(url).request().get();
+	   String entity = response.readEntity(String.class);
+	   f0.write("\n\nRequest #:"+reqNo+" "+reqType+" "+url+" Accept: "+media+" Content-type: "+media);
+	   f0.write("\nResult: "+ response.getStatusInfo().getReasonPhrase() + "\nHTTP Status:"+response.getStatus()+"\n");
+	   
+	   
+	   if(reqType.toLowerCase().contains("get"))
+	       output =service.path(url).request().accept(media).get().readEntity(String.class);
+	   if(reqType.toLowerCase().contains("post"))
+	       output =service.path(url).request().accept(media).post(Entity.json(data)).readEntity(String.class);
+	   if(reqType.toLowerCase().contains("put"))
+	       output =service.path(url).request().accept(media).put(Entity.json(data)).readEntity(String.class);
+	   if(reqType.toLowerCase().contains("delete"))
+	       output =service.path(url).request().accept(media).delete().readEntity(String.class);
+	   
+	   
+       } catch (IOException ex) {
+	   Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
+       }
+    return output;
 }
 
     public static String getPeople(String media) {
@@ -277,8 +291,8 @@ public  static String getPersonMeasureRange(int pid,String measure,int min, int 
         }
 private static URI getBaseURI() {
 		return UriBuilder.fromUri(
-				"http://127.0.1.1:5700/sdelab/").build();
-			//"https://evening-forest-2924.herokuapp.com/sdelab/").build();
+				//"http://127.0.1.1:5700/sdelab/").build();
+			"https://evening-forest-2924.herokuapp.com/sdelab/").build();
 	}
 
 }
