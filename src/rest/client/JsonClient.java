@@ -21,7 +21,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
-public class Test {
+public class JsonClient {
    static ClientConfig clientConfig = new ClientConfig();
 	static	Client client = ClientBuilder.newClient(clientConfig);
 	static	WebTarget service = client.target(getBaseURI());
@@ -199,7 +199,7 @@ try{
 	   DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 	   doc = docBuilder.parse(new InputSource(new ByteArrayInputStream(xml.getBytes("utf-8"))));
        } catch (Exception ex) {
-	   Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
+	   Logger.getLogger(JsonClient.class.getName()).log(Level.SEVERE, null, ex);
        } 
 	return doc;
     }
@@ -277,8 +277,8 @@ public  static String getPersonMeasureRange(int pid,String measure,int min, int 
         }
 private static URI getBaseURI() {
 		return UriBuilder.fromUri(
-				"http://127.0.1.1:5700/sdelab/").build();
-			//"https://evening-forest-2924.herokuapp.com/sdelab/").build();
+				//"http://127.0.1.1:5700/sdelab/").build();
+			"https://evening-forest-2924.herokuapp.com/sdelab/").build();
 	}
 
 }

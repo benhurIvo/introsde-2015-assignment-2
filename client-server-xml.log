@@ -1,0 +1,559 @@
+
+Request #:1 GET person Accept: application/xml Content-type: application/xml
+
+Result: OK
+HTTP Status:200
+
+
+
+Request #:1 GET person Accept: application/xml Content-type: application/xml
+
+Result: OK
+HTTP Status:200
+
+<?xml version="1.0" encoding="UTF-8"?><peoples>
+  <person id="1">
+    <firstname>ganya</firstname>
+    <lastname>noise</lastname>
+    <birthdate>1922-01-01</birthdate>
+    <healthProfile>
+      <height>19</height>
+      <weight>22.0</weight>
+    </healthProfile>
+  </person>
+  <person id="28">
+    <firstname>Salim</firstname>
+    <lastname>Saleh</lastname>
+    <birthdate>2000-01-01</birthdate>
+    <healthProfile>
+      <bloodpressure>22.0</bloodpressure>
+      <height>12.0</height>
+      <weight>20.9</weight>
+    </healthProfile>
+  </person>
+  <person id="32">
+    <firstname>Salim</firstname>
+    <lastname>Saleh</lastname>
+    <birthdate>2000-01-01</birthdate>
+    <healthProfile>
+      <bloodpressure>12</bloodpressure>
+      <height>12.0</height>
+      <weight>20.9</weight>
+    </healthProfile>
+  </person>
+  <person id="36">
+    <firstname>Salim</firstname>
+    <lastname>Saleh</lastname>
+    <birthdate>2000-01-01</birthdate>
+    <healthProfile>
+      <bloodpressure>12</bloodpressure>
+      <height>12.0</height>
+      <weight>20.9</weight>
+    </healthProfile>
+  </person>
+  <person id="40">
+    <firstname>Salim</firstname>
+    <lastname>Saleh</lastname>
+    <birthdate>2000-01-01</birthdate>
+    <healthProfile>
+      <bloodpressure>12</bloodpressure>
+      <height>12.0</height>
+      <weight>20.9</weight>
+    </healthProfile>
+  </person>
+  <person id="60">
+    <firstname>Benhur</firstname>
+    <lastname>Ivo</lastname>
+    <birthdate>2819-01-01</birthdate>
+    <healthProfile>
+      <height>17.0</height>
+      <weight>12.0</weight>
+    </healthProfile>
+  </person>
+  <person id="63">
+    <firstname>Chic</firstname>
+    <lastname>pretty</lastname>
+    <birthdate>2000-01-01</birthdate>
+    <healthProfile>
+      <bloodpressure>12</bloodpressure>
+      <height>12.0</height>
+    </healthProfile>
+  </person>
+  <person id="66">
+    <firstname>ivo</firstname>
+    <lastname>ivan</lastname>
+    <birthdate>2000-01-01</birthdate>
+    <healthProfile>
+      <bloodpressure>12</bloodpressure>
+      <weight>12</weight>
+    </healthProfile>
+  </person>
+  <person id="69">
+    <firstname>Mercy</firstname>
+    <lastname>Lovely</lastname>
+    <birthdate>2000-01-01</birthdate>
+    <healthProfile>
+      <bloodpressure>12</bloodpressure>
+      <weight>60</weight>
+    </healthProfile>
+  </person>
+</peoples>
+
+<?xml version="1.0" encoding="UTF-8"?><peoples>
+  <person id="1">
+    <firstname>ganya</firstname>
+    <lastname>noise</lastname>
+    <birthdate>1922-01-01</birthdate>
+    <healthProfile>
+      <height>19</height>
+      <weight>22.0</weight>
+    </healthProfile>
+  </person>
+  <person id="28">
+    <firstname>Salim</firstname>
+    <lastname>Saleh</lastname>
+    <birthdate>2000-01-01</birthdate>
+    <healthProfile>
+      <bloodpressure>22.0</bloodpressure>
+      <height>12.0</height>
+      <weight>20.9</weight>
+    </healthProfile>
+  </person>
+  <person id="32">
+    <firstname>Salim</firstname>
+    <lastname>Saleh</lastname>
+    <birthdate>2000-01-01</birthdate>
+    <healthProfile>
+      <bloodpressure>12</bloodpressure>
+      <height>12.0</height>
+      <weight>20.9</weight>
+    </healthProfile>
+  </person>
+  <person id="36">
+    <firstname>Salim</firstname>
+    <lastname>Saleh</lastname>
+    <birthdate>2000-01-01</birthdate>
+    <healthProfile>
+      <bloodpressure>12</bloodpressure>
+      <height>12.0</height>
+      <weight>20.9</weight>
+    </healthProfile>
+  </person>
+  <person id="40">
+    <firstname>Salim</firstname>
+    <lastname>Saleh</lastname>
+    <birthdate>2000-01-01</birthdate>
+    <healthProfile>
+      <bloodpressure>12</bloodpressure>
+      <height>12.0</height>
+      <weight>20.9</weight>
+    </healthProfile>
+  </person>
+  <person id="60">
+    <firstname>Benhur</firstname>
+    <lastname>Ivo</lastname>
+    <birthdate>2819-01-01</birthdate>
+    <healthProfile>
+      <height>17.0</height>
+      <weight>12.0</weight>
+    </healthProfile>
+  </person>
+  <person id="63">
+    <firstname>Chic</firstname>
+    <lastname>pretty</lastname>
+    <birthdate>2000-01-01</birthdate>
+    <healthProfile>
+      <bloodpressure>12</bloodpressure>
+      <height>12.0</height>
+    </healthProfile>
+  </person>
+  <person id="66">
+    <firstname>ivo</firstname>
+    <lastname>ivan</lastname>
+    <birthdate>2000-01-01</birthdate>
+    <healthProfile>
+      <bloodpressure>12</bloodpressure>
+      <weight>12</weight>
+    </healthProfile>
+  </person>
+  <person id="69">
+    <firstname>Mercy</firstname>
+    <lastname>Lovely</lastname>
+    <birthdate>2000-01-01</birthdate>
+    <healthProfile>
+      <bloodpressure>12</bloodpressure>
+      <weight>60</weight>
+    </healthProfile>
+  </person>
+</peoples>
+
+
+ Proceeding to step 2 printing first person
+
+
+Request #:2 GET person/1 Accept: application/xml Content-type: application/xml
+
+Result: OK
+HTTP Status:200
+
+<?xml version="1.0" encoding="UTF-8"?><person id="1">
+  <firstname>ganya</firstname>
+  <lastname>noise</lastname>
+  <birthdate>1922-01-01</birthdate>
+  <healthProfile>
+    <height>19</height>
+    <weight>22.0</weight>
+  </healthProfile>
+</person>
+
+
+ Proceeding to step 3, changing first name of first person
+
+
+Request #:3 PUT person/1 Accept: application/xml Content-type: application/xml
+
+Result: OK
+HTTP Status:200
+
+<?xml version="1.0" encoding="UTF-8"?><person id="1">
+  <firstname>Chuck</firstname>
+  <lastname>Norris</lastname>
+  <birthdate>1945-01-01</birthdate>
+  <healthProfile>
+    <height>19</height>
+    <weight>22.0</weight>
+  </healthProfile>
+</person>
+
+
+ Proceeding to step 4, adding new person
+
+
+Request #:4 POST person/ Accept: application/xml Content-type: application/xml
+
+Result: OK
+HTTP Status:200
+
+ids 72 1 69
+Person successfully saved
+<?xml version="1.0" encoding="UTF-8"?><person id="72">
+  <firstname>Chuck</firstname>
+  <lastname>Norris</lastname>
+  <birthdate>1945-01-01</birthdate>
+  <healthProfile>
+    <height>172</height>
+    <weight>78.9</weight>
+  </healthProfile>
+</person>
+
+
+ Proceeding to step 5, deleting new person and returning list of people
+
+
+Request #:5 DELETE person/72 Accept: application/xml Content-type: application/xml
+
+Result: OK
+HTTP Status:200
+
+<?xml version="1.0" encoding="UTF-8"?><peoples>
+  <person id="1">
+    <firstname>Chuck</firstname>
+    <lastname>Norris</lastname>
+    <birthdate>1945-01-01</birthdate>
+    <healthProfile>
+      <height>19</height>
+      <weight>22.0</weight>
+    </healthProfile>
+  </person>
+  <person id="28">
+    <firstname>Salim</firstname>
+    <lastname>Saleh</lastname>
+    <birthdate>2000-01-01</birthdate>
+    <healthProfile>
+      <bloodpressure>22.0</bloodpressure>
+      <height>12.0</height>
+      <weight>20.9</weight>
+    </healthProfile>
+  </person>
+  <person id="32">
+    <firstname>Salim</firstname>
+    <lastname>Saleh</lastname>
+    <birthdate>2000-01-01</birthdate>
+    <healthProfile>
+      <bloodpressure>12</bloodpressure>
+      <height>12.0</height>
+      <weight>20.9</weight>
+    </healthProfile>
+  </person>
+  <person id="36">
+    <firstname>Salim</firstname>
+    <lastname>Saleh</lastname>
+    <birthdate>2000-01-01</birthdate>
+    <healthProfile>
+      <bloodpressure>12</bloodpressure>
+      <height>12.0</height>
+      <weight>20.9</weight>
+    </healthProfile>
+  </person>
+  <person id="40">
+    <firstname>Salim</firstname>
+    <lastname>Saleh</lastname>
+    <birthdate>2000-01-01</birthdate>
+    <healthProfile>
+      <bloodpressure>12</bloodpressure>
+      <height>12.0</height>
+      <weight>20.9</weight>
+    </healthProfile>
+  </person>
+  <person id="60">
+    <firstname>Benhur</firstname>
+    <lastname>Ivo</lastname>
+    <birthdate>2819-01-01</birthdate>
+    <healthProfile>
+      <height>17.0</height>
+      <weight>12.0</weight>
+    </healthProfile>
+  </person>
+  <person id="63">
+    <firstname>Chic</firstname>
+    <lastname>pretty</lastname>
+    <birthdate>2000-01-01</birthdate>
+    <healthProfile>
+      <bloodpressure>12</bloodpressure>
+      <height>12.0</height>
+    </healthProfile>
+  </person>
+  <person id="66">
+    <firstname>ivo</firstname>
+    <lastname>ivan</lastname>
+    <birthdate>2000-01-01</birthdate>
+    <healthProfile>
+      <bloodpressure>12</bloodpressure>
+      <weight>12</weight>
+    </healthProfile>
+  </person>
+  <person id="69">
+    <firstname>Mercy</firstname>
+    <lastname>Lovely</lastname>
+    <birthdate>2000-01-01</birthdate>
+    <healthProfile>
+      <bloodpressure>12</bloodpressure>
+      <weight>60</weight>
+    </healthProfile>
+  </person>
+</peoples>
+
+
+ Getting measuretypes
+
+
+Request #:9 GET measureTypes Accept: application/xml Content-type: application/xml
+
+Result: OK
+HTTP Status:200
+
+<?xml version="1.0" encoding="UTF-8"?><measureTypes>
+  <measureType>
+    <value>height</value>
+  </measureType>
+  <measureType>
+    <value>weight</value>
+  </measureType>
+  <measureType>
+    <value>bloodpressure</value>
+  </measureType>
+</measureTypes>
+
+
+ Measuretypes for first and last person
+measures height
+
+
+Request #:6 GET person/1/height Accept: application/xml Content-type: application/xml
+
+Result: OK
+HTTP Status:200
+
+
+
+Request #:6 GET person/69/height Accept: application/xml Content-type: application/xml
+
+Result: OK
+HTTP Status:200
+
+1st person height
+<?xml version="1.0" encoding="UTF-8"?><measures>
+  <Measure id="3">
+    <value>172.0</value>
+    <datechanged>2015-11-15</datechanged>
+  </Measure>
+  <Measure id="44">
+    <value>17.0</value>
+    <datechanged>2015-11-16</datechanged>
+  </Measure>
+  <Measure id="45">
+    <value>19</value>
+    <datechanged>2015-11-16</datechanged>
+  </Measure>
+</measures>
+
+2nd person height
+<?xml version="1.0" encoding="UTF-8"?><measures/>
+
+list size 3
+measures 17.02015-11-16
+
+
+Request #:6 GET person/1/17.02015-11-16 Accept: application/xml Content-type: application/xml
+
+Result: OK
+HTTP Status:200
+
+
+
+Request #:6 GET person/69/17.02015-11-16 Accept: application/xml Content-type: application/xml
+
+Result: OK
+HTTP Status:200
+
+1st person 17.02015-11-16
+<?xml version="1.0" encoding="UTF-8"?><measures/>
+
+2nd person 17.02015-11-16
+<?xml version="1.0" encoding="UTF-8"?><measures/>
+
+
+ Measuretype for given measure id for ist person
+
+
+Request #:7 GET person/1/height/45 Accept: application/xml Content-type: application/xml
+
+Result: OK
+HTTP Status:200
+
+<?xml version="1.0" encoding="UTF-8"?><Measure>
+  <value>19</value>
+  <datechanged>2015-11-16</datechanged>
+</Measure>
+
+
+ Measure history for 1st person
+
+
+Request #:6 GET person/1/height Accept: application/xml Content-type: application/xml
+
+Result: OK
+HTTP Status:200
+
+<?xml version="1.0" encoding="UTF-8"?><measures>
+  <Measure id="3">
+    <value>172.0</value>
+    <datechanged>2015-11-15</datechanged>
+  </Measure>
+  <Measure id="44">
+    <value>17.0</value>
+    <datechanged>2015-11-16</datechanged>
+  </Measure>
+  <Measure id="45">
+    <value>19</value>
+    <datechanged>2015-11-16</datechanged>
+  </Measure>
+</measures>
+
+
+ Measure has 3 elements
+
+ Adding Measure to 1st person
+
+
+Request #:8 POST person/1/height/ Accept: application/xml Content-type: application/xml
+
+Result: OK
+HTTP Status:200
+
+
+
+Request #:6 GET person/1/height Accept: application/xml Content-type: application/xml
+
+Result: OK
+HTTP Status:200
+
+<?xml version="1.0" encoding="UTF-8"?><measures>
+  <Measure id="3">
+    <value>172.0</value>
+    <datechanged>2015-11-15</datechanged>
+  </Measure>
+  <Measure id="44">
+    <value>17.0</value>
+    <datechanged>2015-11-16</datechanged>
+  </Measure>
+  <Measure id="45">
+    <value>19</value>
+    <datechanged>2015-11-16</datechanged>
+  </Measure>
+  <Measure id="75">
+    <value>200</value>
+    <datechanged>2015-11-24</datechanged>
+  </Measure>
+</measures>
+
+
+ Measure had 3 elements but now has 4 elements
+
+ Updating the created Measure for 1st person
+
+
+Request #:10 PUT person/1/height/45 Accept: application/xml Content-type: application/xml
+
+Result: OK
+HTTP Status:200
+
+<?xml version="1.0" encoding="UTF-8"?><Measure>
+  <value>300</value>
+  <datechanged>2015-11-16</datechanged>
+</Measure>
+
+
+ Getting measuretypes in a certain date range
+
+
+Request #:11 GET person/1/height/before=12-12-2022&after=14-11-1888 Accept: application/xml Content-type: application/xml
+
+Result: OK
+HTTP Status:200
+
+<?xml version="1.0" encoding="UTF-8"?><measures>
+  <Measure id="3">
+    <value>172.0</value>
+    <datechanged>2015-11-15</datechanged>
+  </Measure>
+  <Measure id="44">
+    <value>17.0</value>
+    <datechanged>2015-11-16</datechanged>
+  </Measure>
+  <Measure id="45">
+    <value>300</value>
+    <datechanged>2015-11-16</datechanged>
+  </Measure>
+</measures>
+
+
+ Getting measuretypes in a certain size range
+
+
+Request #:12 GET person/height/max=300&min=20 Accept: application/xml Content-type: application/xml
+
+Result: OK
+HTTP Status:200
+
+<?xml version="1.0" encoding="UTF-8"?><peoples>
+  <person id="1">
+    <firstname>Chuck</firstname>
+    <lastname>Norris</lastname>
+    <birthdate>1945-01-01</birthdate>
+    <healthProfile>
+      <height>200</height>
+      <weight>22.0</weight>
+    </healthProfile>
+  </person>
+</peoples>

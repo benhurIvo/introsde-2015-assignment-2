@@ -139,7 +139,19 @@
         
         <target name="jsonclient">
 		<echo message="Running json client" />
-		<java classname="rest.client.Test" classpath="${build.dir}">
+		<java classname="rest.client.JsonClient" classpath="${build.dir}">
+			<classpath>
+				<fileset dir="${lib.dir}">
+					<include name="**/*.jar" />
+					<include name="*.jar" />
+				</fileset>
+			</classpath>
+		</java>
+	</target>
+	
+	<target name="xmlclient">
+		<echo message="Running xml client" />
+		<java classname="rest.client.XmlClient" classpath="${build.dir}">
 			<classpath>
 				<fileset dir="${lib.dir}">
 					<include name="**/*.jar" />
@@ -149,7 +161,7 @@
 		</java>
 	</target>
         
-        <target name="execute.client" depends="install, jsonclient">
+        <target name="execute.client" depends="install, jsonclient,xmlclient">
 <echo message="Executing Evaluation: produced all output displayed above." />
 
 </target> 

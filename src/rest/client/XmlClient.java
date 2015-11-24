@@ -1,8 +1,7 @@
 package rest.client;
 
 import java.io.ByteArrayInputStream;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,7 +22,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
-public class Test {
+public class XmlClient {
    static ClientConfig clientConfig = new ClientConfig();
 	static	Client client = ClientBuilder.newClient(clientConfig);
 	static	WebTarget service = client.target(getBaseURI());
@@ -34,26 +33,20 @@ public class Test {
 	static int count=0;
 	static int newcount=0;
 	static String measure="";
-	static FileWriter f0;
-	static String newLine;
+	static String measure2="";
 	public static void main(String[] args) {
 
-	String Jdata = "{\n" +
-"    \"firstname\": \"Chuck\",\n" +
-"    \"lastname\": \"Norris\",\n" +
-"    \"birthdate\": \"1945-01-01\",\n" +
-"    \"healthProfile\": {\n" +
-"      \"weight\": \"78.9\",\n" +
-"      \"height\": \"172\",\n" +
-"      \"bloodpressure\": null\n" +
-"    }\n" +
-"  }";
+	String Jdata = "<person>\n" +
+"    <firstname>Chuck</firstname>\n" +
+"        <lastname>Norris</lastname>\n" +
+"        <birthdate>1945-01-01</birthdate>\n" +
+"        <healthProfile>\n" +
+"            <weight>78.9</weight>\n" +
+"            <height>172</height>\n" +
+"        </healthProfile>\n" +
+"</person>";
 	
 try{
- f0 = new FileWriter(System.getProperty("user.dir")+"/client-server-json.log");
-
-  newLine = System.getProperty("line.separator");
- 
     String media = MediaType.APPLICATION_XML;
 	String output = getResults("1","GET","person","",media);
 	JSONArray array = null;
@@ -93,106 +86,126 @@ try{
 //	else{
 //	System.out.println("Result: ERROR Too few people \nHTTP Status: 400");
 //	}
-	  media = MediaType.APPLICATION_JSON;
+	 // media = MediaType.APPLICATION_JSON;
 	 output = getResults("1","GET","person","",media);
+	  System.out.println(Formatter.prettyXMLFormat(output));
+	DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+	DocumentBuilder db = dbf.newDocumentBuilder();
+	InputStream is = new ByteArrayInputStream(output.getBytes("UTF-8"));
+	Document doc =db.parse(is);
+//
+	  list = doc.getElementsByTagName("person");
+		cnt = list.getLength();
+	if(cnt>3){
+	    first_person_id = Integer.parseInt(list.item(0).getAttributes().getNamedItem("id").getTextContent());
+	    last_person_id = Integer.parseInt(list.item(list.getLength()-1).getAttributes().getNamedItem("id").getTextContent());
 	
-	array = new JSONArray(output); 
-	cnt = array.length();
-	if(cnt>3){	    
-	    //System.out.println("Result: OK \n HTTP Status: 200");
-	  // if(media.equals(MediaType.APPLICATION_XML)){
-	    first_person_id = Integer.parseInt(array.getJSONObject(0).getString("id"));
-	    last_person_id = Integer.parseInt(array.getJSONObject(array.length()-1).getString("id"));
-	
-	    f0.write(Formatter.prettyJsonFormat(output));
-	    f0.write("\n Proceeding to step 2 printing first person");
-	    f0.write(Formatter.prettyJsonFormat(getPersonId(media,first_person_id)));
-	    f0.write("\n Proceeding to step 3, changing first name of first person");
-	    f0.write(Formatter.prettyJsonFormat(putPersonId(Jdata,media,first_person_id)));
-	    f0.write("\n Proceeding to step 4, adding new person");
+	    System.out.println(Formatter.prettyXMLFormat(output));
+	    System.out.println("\n Proceeding to step 2 printing first person");
+	    System.out.println(Formatter.prettyXMLFormat(getPersonId(media,first_person_id)));
+	    System.out.println("\n Proceeding to step 3, changing first name of first person");
+	       System.out.println(Formatter.prettyXMLFormat(putPersonId(Jdata,media,first_person_id)));
+	      System.out.println("\n Proceeding to step 4, adding new person");
 	      output = getResults("4","POST","person/",Jdata,media);
-	      array = new JSONArray("["+output+"]"); 
-		JSONObject jsonObj  = array.getJSONObject(array.length()-1);
-		new_person_id=Integer.parseInt(jsonObj.getString("id"));
+	     is = new ByteArrayInputStream(output.getBytes("UTF-8"));
+	     doc =db.parse(is);//
+	  list = doc.getElementsByTagName("person");
+	  new_person_id=Integer.parseInt(list.item(list.getLength()-1).getAttributes().getNamedItem("id").getTextContent());
+	    System.out.println("ids "+new_person_id + " "+first_person_id+" "+last_person_id);
 	      if(last_person_id==new_person_id)
-		   f0.write("Person not saved");
+		   System.out.println("Person not saved");
 		   
 	      else {
-	      f0.write("Person successfully saved");
-	       f0.write(Formatter.prettyJsonFormat(output));	       
-		f0.write("\n Proceeding to step 5, deleting new person and returning list of people");
-		f0.write(Formatter.prettyJsonFormat(delPerson("",media,new_person_id)));
+	      System.out.println("Person successfully saved");
+	       System.out.println(Formatter.prettyXMLFormat(output));	       
+		System.out.println("\n Proceeding to step 5, deleting new person and returning list of people");
+		System.out.println(Formatter.prettyXMLFormat(delPerson("",media,new_person_id)));
 	      }
-	      f0.write("\n Getting measuretypes");
+	      System.out.println("\n Getting measuretypes");
 	      output = getMeasure(media);
 	
-	array = new JSONArray(output); 
-	cnt = array.length();
+	is = new ByteArrayInputStream(output.getBytes("UTF-8"));
+	     doc =db.parse(is);//
+	  list = doc.getElementsByTagName("measureType");
+	  cnt = list.getLength();
 	if(cnt<2)
-	    f0.write("\nFew measuretypes");
+	    System.out.println("\nFew measuretypes");
 	else{
-	f0.write(Formatter.prettyJsonFormat(output));
-	f0.write("\n Measuretypes for first and last person");		
-	      array = new JSONArray(output); 
-		for(int i=0;i<array.length();i++){
-		    String rslt = getResults("6","GET","person/"+String.valueOf(first_person_id)+"/"+array.getJSONObject(i).getString("value"),"",media);
-		    String rslt1 = getResults("6","GET","person/"+String.valueOf(first_person_id)+"/"+array.getJSONObject(i).getString("value"),"",media);
-		    if(array.getJSONObject(i).getString("value").toString().length()!=0){
-		    f0.write("1st person " + array.getJSONObject(i).getString("value")+"\n" +Formatter.prettyJsonFormat(rslt));
-		    f0.write("2nd person " + array.getJSONObject(i).getString("value")+"\n" +Formatter.prettyJsonFormat(rslt1));
+	System.out.println(Formatter.prettyXMLFormat(output));
+	System.out.println("\n Measuretypes for first and last person");		
+	      is = new ByteArrayInputStream(output.getBytes("UTF-8"));
+	     doc =db.parse(is);//
+	  list = doc.getElementsByTagName("measureType");
+		for(int i=0;i<list.getLength();i++){
+		    System.out.println("measures "+list.item(i).getTextContent());
+		    //System.out.println("val "+list.item(i).());
+		    String rslt = getResults("6","GET","person/"+String.valueOf(first_person_id)+"/"+list.item(i).getTextContent(),"",media);
+		    String rslt1 = getResults("6","GET","person/"+String.valueOf(last_person_id)+"/"+list.item(i).getTextContent(),"",media);
+		    if(list.item(i).getTextContent().length()!=0){
+		    System.out.println("1st person " + list.item(i).getTextContent()+"\n" +Formatter.prettyXMLFormat(rslt));
+		    System.out.println("2nd person " + list.item(i).getTextContent()+"\n" +Formatter.prettyXMLFormat(rslt1));
 		
-		    }if(rslt.length()>5)
+		    }
+	measure2 = list.item(i).getTextContent();
+	is = new ByteArrayInputStream(rslt.getBytes("UTF-8"));
+	     doc =db.parse(is);//
+	  list = doc.getElementsByTagName("Measure");
+		    if(list.getLength()>0)
 		{
-		measure = array.getJSONObject(i).getString("value");
-		array2 = new JSONArray(rslt);
-		mid = Integer.parseInt(array2.getJSONObject(i).getString("id"));
-		 		
+		measure = measure2;	   
+	     System.out.println("list size "+list.getLength());
+	  mid=Integer.parseInt(list.item(list.getLength()-1).getAttributes().getNamedItem("id").getTextContent());
+	 		
 		}
 	}
-		  f0.write("\n Measuretype for for given measure id for ist person");
-		  f0.write(Formatter.prettyJsonFormat(getPersonMeasureId(first_person_id,measure,mid,media)));
-		  f0.write("\n Measure history for 1st person");
+		  System.out.println("\n Measuretype for given measure id for ist person");
+		  System.out.println(Formatter.prettyXMLFormat(getPersonMeasureId(first_person_id,measure,mid,media)));
+		  System.out.println("\n Measure history for 1st person");
 		  output = getPersonMeasure(first_person_id,measure,media);
-		  f0.write(Formatter.prettyJsonFormat(output));
-		  array = new JSONArray(output);
-		  count = array.length();
-		  f0.write("\n Measure has "+count + " elements");
-		  f0.write("\n Adding Measure to 1st person");
-		  Jdata = " {\n" +
-"  \"value\" : \"200\"\n" +
-"} ";
+		  System.out.println(Formatter.prettyXMLFormat(output));
+		  is = new ByteArrayInputStream(output.getBytes("UTF-8"));
+	     doc =db.parse(is);//
+	  list = doc.getElementsByTagName("Measure");
+		  count = list.getLength();
+		  System.out.println("\n Measure has "+count + " elements");
+		  System.out.println("\n Adding Measure to 1st person");
+		  Jdata = "<Measure>\n" +
+"        <value>200</value>\n" +
+"    </Measure>";
 		  output = postPersonMeasureId(first_person_id,measure,Jdata,media);
-		  array = new JSONArray(output);
-		  newcount = array.length();
+		  is = new ByteArrayInputStream(output.getBytes("UTF-8"));
+	     doc =db.parse(is);//
+	  list = doc.getElementsByTagName("Measure");
+		  newcount = list.getLength();
 		  output = getPersonMeasure(first_person_id,measure,media);
-		  f0.write(Formatter.prettyJsonFormat(output));		  
-		  f0.write("\n Measure had "+count + " elements but now has "+newcount+" elements");
+		  System.out.println(Formatter.prettyXMLFormat(output));		  
+		  System.out.println("\n Measure had "+count + " elements but now has "+newcount+" elements");
 	
-		  f0.write("\n Updating the created Measure for 1st person");
+		  System.out.println("\n Updating the created Measure for 1st person");
 		  //array = new JSONArray(rslt);
-		mid = Integer.parseInt(array.getJSONObject(array.length()-1).getString("id"));
-		Jdata = " {\n" +
-"  \"value\" : \"300\"\n" +
-"} ";
+		//mid = Integer.parseInt(array.getJSONObject(array.length()-1).getString("id"));
+		Jdata = "<Measure>\n" +
+"        <value>300</value>\n" +
+"    </Measure>";
 		output = putPersonMeasureId(first_person_id,measure,mid,media,Jdata);
-		f0.write(Formatter.prettyJsonFormat(output));
-		f0.write("\n Getting measuretypes in a certain date range");
-		f0.write(Formatter.prettyJsonFormat(getPersonMeasureDate(first_person_id,measure,"12-12-2022","14-11-1888",media)));
-		f0.write("\n Getting measuretypes in a certain size range");
-		f0.write(Formatter.prettyJsonFormat(getPersonMeasureRange(first_person_id,measure,20,300,media)));
+		System.out.println(Formatter.prettyXMLFormat(output));
+		System.out.println("\n Getting measuretypes in a certain date range");
+		System.out.println(Formatter.prettyXMLFormat(getPersonMeasureDate(first_person_id,measure,"12-12-2022","14-11-1888",media)));
+		System.out.println("\n Getting measuretypes in a certain size range");
+		System.out.println(Formatter.prettyXMLFormat(getPersonMeasureRange(first_person_id,measure,20,300,media)));
 	}
 	      
 	   }
 	   else{
-	    f0.write("Result: ERROR Too few people \nHTTP Status: 400");
+	    System.out.println("Result: ERROR Too few people \nHTTP Status: 400");
 	}
 	
 //		System.out.println("Result: ERROR \nHTTP Status: 200");
 //		if(media.equals(MediaType.APPLICATION_XML))
 //	    System.out.println(Formatter.prettyXMLFormat(output));
 //	else
-//	    System.out.println(Formatter.prettyJsonFormat(output));
-	f0.close();
+//	    System.out.println(Formatter.prettyXMLFormat(output));
+	
 	}catch(Exception ex){
 	ex.printStackTrace();
 	}	
@@ -207,35 +220,29 @@ try{
 	   DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 	   doc = docBuilder.parse(new InputSource(new ByteArrayInputStream(xml.getBytes("utf-8"))));
        } catch (Exception ex) {
-	   Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
+	   Logger.getLogger(XmlClient.class.getName()).log(Level.SEVERE, null, ex);
        } 
 	return doc;
     }
 	
 public static String getResults(String reqNo,String reqType,String url,String data,String media){
-    
-	   String output ="";   
-    try {
-	   Response response = service.path(url).request().get();
-	   String entity = response.readEntity(String.class);
-	   f0.write("\n\nRequest #:"+reqNo+" "+reqType+" "+url+" Accept: "+media+" Content-type: "+media);
-	   f0.write("\nResult: "+ response.getStatusInfo().getReasonPhrase() + "\nHTTP Status:"+response.getStatus()+"\n");
-	   
-	   
-	   if(reqType.toLowerCase().contains("get"))
-	       output =service.path(url).request().accept(media).get().readEntity(String.class);
-	   if(reqType.toLowerCase().contains("post"))
-	       output =service.path(url).request().accept(media).post(Entity.json(data)).readEntity(String.class);
-	   if(reqType.toLowerCase().contains("put"))
-	       output =service.path(url).request().accept(media).put(Entity.json(data)).readEntity(String.class);
-	   if(reqType.toLowerCase().contains("delete"))
-	       output =service.path(url).request().accept(media).delete().readEntity(String.class);
-	   
-	   
-       } catch (IOException ex) {
-	   Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
-       }
-    return output;
+   Response response = service.path(url).request().get();
+String entity = response.readEntity(String.class);
+System.out.println("\n\nRequest #:"+reqNo+" "+reqType+" "+url+" Accept: "+media+" Content-type: "+media);
+System.out.println("\nResult: "+ response.getStatusInfo().getReasonPhrase() + "\nHTTP Status:"+response.getStatus()+"\n");
+
+
+String output ="";
+if(reqType.toLowerCase().contains("get"))
+output =service.path(url).request().accept(media).get().readEntity(String.class);
+if(reqType.toLowerCase().contains("post"))
+output =service.path(url).request().accept(media).post(Entity.xml(data)).readEntity(String.class);
+if(reqType.toLowerCase().contains("put"))
+output =service.path(url).request().accept(media).put(Entity.xml(data)).readEntity(String.class);
+if(reqType.toLowerCase().contains("delete"))
+output =service.path(url).request().accept(media).delete().readEntity(String.class);
+  
+return output;
 }
 
     public static String getPeople(String media) {
